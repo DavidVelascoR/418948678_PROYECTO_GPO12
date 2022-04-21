@@ -102,13 +102,11 @@ int main()
     Shader lightingShader("Shaders/lighting.vs", "Shaders/lighting.frag");
 
 
-
     // Load models
-    Model pokearriba((char*)"Pokeball2/pokearriba.obj");
-    Model pokeabajo((char*)"Pokeball2/pokeabajo.obj");
-    Model centro((char*)"Pokeball2/centro.obj");
-    Model cuerpo((char*)"Pokeball2/centrocuerpo.obj");
     Model golem((char*)"Golem/Golem.obj");
+    Model cuadro((char*)"Cuadro/cuadro.obj");
+
+
     glm::mat4 projection = glm::perspective(camera.GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 100.0f);
 
     float vertices[] = {
@@ -232,120 +230,29 @@ int main()
         glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
         glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
 
-        //pokebolla 1
+        //golem de nieve
         // Set material properties
         glUniform3f(glGetUniformLocation(lightingShader.Program, "material.ambient"), 0.1f, 0.1f, 0.1f);
         glUniform3f(glGetUniformLocation(lightingShader.Program, "material.diffuse"), 1.0f, 1.0f, 1.0f);//color
         glUniform3f(glGetUniformLocation(lightingShader.Program, "material.specular"), 0.5f, 0.5f, 0.5f);//brillo 
         glUniform1f(glGetUniformLocation(lightingShader.Program, "material.shininess"), 32.0f);
         glm::mat4 model(1);
+        model = glm::translate(model, glm::vec3(2.0f, 0.0f, -6.0f));
+        model = glm::scale(model,glm::vec3(4.0f,4.0f,4.0f));
         glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         golem.Draw(lightingShader);
 
-        //glUniform3f(glGetUniformLocation(lightingShader.Program, "material.diffuse"), 1.0f, 1.0f, 1.0f); 
-        //model = glm::mat4(1);
-        //glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        //pokeabajo.Draw(lightingShader);
-
-        //glUniform3f(glGetUniformLocation(lightingShader.Program, "material.diffuse"), 0.0f, 0.0f, 0.0f);
-        //model = glm::mat4(1);
-        //glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        //cuerpo.Draw(lightingShader);
-
-        //glUniform3f(glGetUniformLocation(lightingShader.Program, "material.diffuse"), 1.0f, 1.0f, 1.0f);
-        //model = glm::mat4(1);
-        //glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        //centro.Draw(lightingShader);
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "material.ambient"), 0.1f, 0.1f, 0.1f);
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "material.diffuse"), 1.0f, 1.0f, 1.0f);//color
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "material.specular"), 0.5f, 0.5f, 0.5f);//brillo 
+        glUniform1f(glGetUniformLocation(lightingShader.Program, "material.shininess"), 32.0f);
+        model = glm::mat4(1);
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        cuadro.Draw(lightingShader);
 
 
-        ////pokebolla 2
-        //// Set material properties
-        //glUniform3f(glGetUniformLocation(lightingShader.Program, "material.ambient"), 1.0f, 0.0f, 0.0f);
-        //glUniform3f(glGetUniformLocation(lightingShader.Program, "material.diffuse"), 1.0f, 0.0f, 0.0f);//color
-        //glUniform3f(glGetUniformLocation(lightingShader.Program, "material.specular"), 0.7f, 0.7f, 0.7f);//brillo 
-        //glUniform1f(glGetUniformLocation(lightingShader.Program, "material.shininess"), 32.0f);
-        //model = glm::mat4(1);
-        //model = glm::translate(model, glm::vec3(5.0f, 0.0f, 0.0f));
-        //glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        //pokearriba.Draw(lightingShader);
 
-        //glUniform3f(glGetUniformLocation(lightingShader.Program, "material.diffuse"), 1.0f, 1.0f, 1.0f);
-        //model = glm::mat4(1);
-        //model = glm::translate(model, glm::vec3(5.0f, 0.0f, 0.0f));
-        //glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        //pokeabajo.Draw(lightingShader);
-
-        //glUniform3f(glGetUniformLocation(lightingShader.Program, "material.diffuse"), 0.0f, 0.0f, 0.0f);
-        //model = glm::mat4(1);
-        //model = glm::translate(model, glm::vec3(5.0f, 0.0f, 0.0f));
-        //glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        //cuerpo.Draw(lightingShader);
-
-        //glUniform3f(glGetUniformLocation(lightingShader.Program, "material.diffuse"), 1.0f, 1.0f, 1.0f);
-        //model = glm::mat4(1);
-        //model = glm::translate(model, glm::vec3(5.0f, 0.0f, 0.0f));
-        //glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        //centro.Draw(lightingShader);
-
-        ////pokebolla 3
-        //// Set material properties
-        //glUniform3f(glGetUniformLocation(lightingShader.Program, "material.ambient"), 1.0f, 0.0f, 0.0f);
-        //glUniform3f(glGetUniformLocation(lightingShader.Program, "material.diffuse"), 0.3f, 0.56f, 0.23f);//color
-        //glUniform3f(glGetUniformLocation(lightingShader.Program, "material.specular"), 0.35f, 0.35f, 0.35f);//brillo genkidama
-        //glUniform1f(glGetUniformLocation(lightingShader.Program, "material.shininess"), 12.0f);
-        //model = glm::mat4(1);
-        //model = glm::translate(model, glm::vec3(10.0f, 0.0f, 0.0f));
-        //glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        //pokearriba.Draw(lightingShader);
-
-        //glUniform3f(glGetUniformLocation(lightingShader.Program, "material.diffuse"), 1.0f, 1.0f, 1.0f);
-        //model = glm::mat4(1);
-        //model = glm::translate(model, glm::vec3(10.0f, 0.0f, 0.0f));
-        //glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        //pokeabajo.Draw(lightingShader);
-
-        //glUniform3f(glGetUniformLocation(lightingShader.Program, "material.diffuse"), 0.0f, 0.0f, 0.0f);
-        //model = glm::mat4(1);
-        //model = glm::translate(model, glm::vec3(10.0f, 0.0f, 0.0f));
-        //glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        //cuerpo.Draw(lightingShader);
-
-        //glUniform3f(glGetUniformLocation(lightingShader.Program, "material.diffuse"), 1.0f, 1.0f, 1.0f);
-        //model = glm::mat4(1);
-        //model = glm::translate(model, glm::vec3(10.0f, 0.0f, 0.0f));
-        //glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        //centro.Draw(lightingShader);
-
-        ////pokebolla 4
-        //// Set material properties
-        //glUniform3f(glGetUniformLocation(lightingShader.Program, "material.ambient"), 1.0f, 0.0f, 0.0f);
-        //glUniform3f(glGetUniformLocation(lightingShader.Program, "material.diffuse"), 0.67f, 0.67f, 0.83f);//color
-        //glUniform3f(glGetUniformLocation(lightingShader.Program, "material.specular"), 0.0f, 0.0f, 0.0f);//brillo genkidama
-        //glUniform1f(glGetUniformLocation(lightingShader.Program, "material.shininess"), 0.0f);
-        //model = glm::mat4(1);
-        //model = glm::translate(model, glm::vec3(15.0f, 0.0f, 0.0f));
-        //glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        //pokearriba.Draw(lightingShader);
-
-        //glUniform3f(glGetUniformLocation(lightingShader.Program, "material.diffuse"), 1.0f, 1.0f, 1.0f);
-        //model = glm::mat4(1);
-        //model = glm::translate(model, glm::vec3(15.0f, 0.0f, 0.0f));
-        //glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        //pokeabajo.Draw(lightingShader);
-
-        //glUniform3f(glGetUniformLocation(lightingShader.Program, "material.diffuse"), 0.0f, 0.0f, 0.0f);
-        //model = glm::mat4(1);
-        //model = glm::translate(model, glm::vec3(15.0f, 0.0f, 0.0f));
-        //glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        //cuerpo.Draw(lightingShader);
-
-        //glUniform3f(glGetUniformLocation(lightingShader.Program, "material.diffuse"), 1.0f, 1.0f, 1.0f);
-        //model = glm::mat4(1);
-        //model = glm::translate(model, glm::vec3(15.0f, 0.0f, 0.0f));
-        //glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        //centro.Draw(lightingShader);
-
-
+        
         glBindVertexArray(0);
 
 
