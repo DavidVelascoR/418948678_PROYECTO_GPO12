@@ -105,6 +105,11 @@ int main()
     // Load models
     Model golem((char*)"Golem/Golem.obj");
     Model cuadro((char*)"Cuadro/cuadro.obj");
+    Model librero((char*)"Librero/librero.obj");
+    Model cofre((char*)"Cofre/cofre.obj");
+    Model mesaEnchArriba((char*)"MesaEncantamientos/mesaEncantamientosArriba.obj");
+    Model mesaEnchAbajo((char*)"MesaEncantamientos/mesaEncantamientosAbajo.obj");
+    Model mesaCrafteo((char*)"MesaCrafteo/mesaCrafteo.obj");
 
 
     glm::mat4 projection = glm::perspective(camera.GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 100.0f);
@@ -237,22 +242,50 @@ int main()
         glUniform3f(glGetUniformLocation(lightingShader.Program, "material.specular"), 0.5f, 0.5f, 0.5f);//brillo 
         glUniform1f(glGetUniformLocation(lightingShader.Program, "material.shininess"), 32.0f);
         glm::mat4 model(1);
-        model = glm::translate(model, glm::vec3(2.0f, 0.0f, -6.0f));
+        model = glm::translate(model, glm::vec3(4.0f, -1.0f, -7.2f));
+        model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
         model = glm::scale(model,glm::vec3(4.0f,4.0f,4.0f));
         glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         golem.Draw(lightingShader);
 
-        glUniform3f(glGetUniformLocation(lightingShader.Program, "material.ambient"), 0.1f, 0.1f, 0.1f);
-        glUniform3f(glGetUniformLocation(lightingShader.Program, "material.diffuse"), 1.0f, 1.0f, 1.0f);//color
-        glUniform3f(glGetUniformLocation(lightingShader.Program, "material.specular"), 0.5f, 0.5f, 0.5f);//brillo 
-        glUniform1f(glGetUniformLocation(lightingShader.Program, "material.shininess"), 32.0f);
         model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-0.06f, 0.0f, 0.0f));
         glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         cuadro.Draw(lightingShader);
 
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-0.9f, 0.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        librero.Draw(lightingShader);
 
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-0.9f, 0.0f, -1.8f));
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        librero.Draw(lightingShader);
 
-        
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-8.1f, 0.0f-0.02f, -7.2f+0.06f));
+        model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        cofre.Draw(lightingShader);
+
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-6.3f, 0.0f, -7.2f));
+        model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        mesaEnchArriba.Draw(lightingShader);
+
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-6.3f, 0.0f, -7.2f));
+        model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        mesaEnchAbajo.Draw(lightingShader);
+
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-4.5f, 0.0f, -7.2f));
+        model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        mesaCrafteo.Draw(lightingShader);        
         glBindVertexArray(0);
 
 
