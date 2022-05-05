@@ -22,7 +22,7 @@
 #include "SOIL2/SOIL2.h"
 #include "stb_image.h"
 // Properties
-const GLuint WIDTH = 800, HEIGHT = 600;
+const GLuint WIDTH = 1024, HEIGHT = 720;
 int SCREEN_WIDTH, SCREEN_HEIGHT;
 
 // Function prototypes
@@ -110,6 +110,8 @@ int main()
     Model mesaEnchArriba((char*)"MesaEncantamientos/mesaEncantamientosArriba.obj");
     Model mesaEnchAbajo((char*)"MesaEncantamientos/mesaEncantamientosAbajo.obj");
     Model mesaCrafteo((char*)"MesaCrafteo/mesaCrafteo.obj");
+    Model casa((char*)"Casa/Casa.obj");
+    Model casaCristales((char*)"Casa/CasaCristales.obj");
 
 
     glm::mat4 projection = glm::perspective(camera.GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 100.0f);
@@ -213,7 +215,7 @@ int main()
         DoMovement();
 
         // Clear the colorbuffer
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         lightingShader.Use();
@@ -240,8 +242,10 @@ int main()
         glUniform3f(glGetUniformLocation(lightingShader.Program, "material.ambient"), 0.1f, 0.1f, 0.1f);
         glUniform3f(glGetUniformLocation(lightingShader.Program, "material.diffuse"), 1.0f, 1.0f, 1.0f);//color
         glUniform3f(glGetUniformLocation(lightingShader.Program, "material.specular"), 0.5f, 0.5f, 0.5f);//brillo 
-        glUniform1f(glGetUniformLocation(lightingShader.Program, "material.shininess"), 32.0f);
+        glUniform1f(glGetUniformLocation(lightingShader.Program, "material.shininess"), 256.0f);
         glm::mat4 model(1);
+        glUniform1f(glGetUniformLocation(lightingShader.Program, "trans"), 1.0f);
+
         model = glm::translate(model, glm::vec3(4.0f, -1.0f, -7.2f));
         model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
         model = glm::scale(model,glm::vec3(4.0f,4.0f,4.0f));
@@ -286,6 +290,25 @@ int main()
         model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
         glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         mesaCrafteo.Draw(lightingShader);        
+
+
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-0.9f, -1.8f, 1.8f));
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        casa.Draw(lightingShader);
+
+        glUniform1f(glGetUniformLocation(lightingShader.Program, "trans"), 0.7f);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-0.9f, -1.8f, 1.8f));
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        casaCristales.Draw(lightingShader);
+        glDisable(GL_BLEND);
+        glUniform1f(glGetUniformLocation(lightingShader.Program, "trans"), 1.0f);
+
+        
+
         glBindVertexArray(0);
 
 
