@@ -39,7 +39,7 @@ bool firstMouse = true;
 
 
 // Light attributes
-glm::vec3 lightPos(0.5f, 0.5f, 2.5f);
+glm::vec3 lightPos(-4.5f, 4.0f, -1.8f);
 float movelightPosx = 0.0f;
 float movelightPosy = 0.0f;
 float movelightPosz = 0.0f;
@@ -111,7 +111,9 @@ int main()
     Model mesaEnchAbajo((char*)"MesaEncantamientos/mesaEncantamientosAbajo.obj");
     Model mesaCrafteo((char*)"MesaCrafteo/mesaCrafteo.obj");
     Model casa((char*)"Casa/Casa.obj");
+    Model escaleras((char*)"Casa/escaleras.obj");
     Model casaCristales((char*)"Casa/CasaCristales.obj");
+    Model pasto((char*)"Pasto/pasto.obj");
 
 
     glm::mat4 projection = glm::perspective(camera.GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 100.0f);
@@ -297,6 +299,26 @@ int main()
         glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         casa.Draw(lightingShader);
 
+
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "material.ambient"), 0.1f, 0.1f, 0.1f);
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "material.diffuse"), 0.631f, 0.745f, 0.294f);//color
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "material.specular"), 0.1f, 0.1f, 0.1f);//brillo 
+        glUniform1f(glGetUniformLocation(lightingShader.Program, "material.shininess"), 256.0f);
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-0.9f, -1.8f, 1.8f));
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        pasto.Draw(lightingShader);
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "material.ambient"), 0.1f, 0.1f, 0.1f);
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "material.diffuse"), 1.0f, 1.0f, 1.0f);//color
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "material.specular"), 0.5f, 0.5f, 0.5f);//brillo 
+        glUniform1f(glGetUniformLocation(lightingShader.Program, "material.shininess"), 256.0f);
+
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-0.9f, -1.8f, 1.8f));
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        escaleras.Draw(lightingShader);
+
+
         glUniform1f(glGetUniformLocation(lightingShader.Program, "trans"), 0.7f);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -322,7 +344,6 @@ int main()
         model = glm::scale(model, glm::vec3(0.02f));
         glUniformMatrix4fv(glGetUniformLocation(lampshader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         glBindVertexArray(VAO);
-        glDrawArrays(GL_TRIANGLES, 0, 36);
         glBindVertexArray(0);
 
         // Swap the buffers
