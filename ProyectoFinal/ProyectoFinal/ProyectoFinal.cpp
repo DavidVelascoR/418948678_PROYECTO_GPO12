@@ -29,10 +29,11 @@ int SCREEN_WIDTH, SCREEN_HEIGHT;
 void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode);
 void MouseCallback(GLFWwindow* window, double xPos, double yPos);
 void DoMovement();
+void animacionGolem();
 
 
 // Camera
-Camera camera(glm::vec3(0.0f, 0.0f, 0.0f));
+Camera camera(glm::vec3(-4.5f, 2.0f, -1.8f));
 bool keys[1024];
 GLfloat lastX = 400, lastY = 300;
 bool firstMouse = true;
@@ -40,13 +41,19 @@ bool firstMouse = true;
 
 // Light attributes
 glm::vec3 lightPos(-4.5f, 4.0f, -1.8f);
-float movelightPosx = 0.0f;
-float movelightPosy = 0.0f;
-float movelightPosz = 0.0f;
 GLfloat deltaTime = 0.0f;
 GLfloat lastFrame = 0.0f;
 float rot = 0.0f;
-bool activanim = false;
+float movx = 0.0f;
+float movz = 0.0f;
+bool ruta1 = true;
+bool ruta2 = false;
+bool ruta3 = false;
+bool ruta4 = false;
+bool ruta5 = false;
+bool ruta6 = false;
+bool ruta7 = false;
+bool ruta8 = false;
 
 int main()
 {
@@ -100,13 +107,15 @@ int main()
     Shader shader("Shaders/modelLoading.vs", "Shaders/modelLoading.frag");
     Shader lampshader("Shaders/lamp.vs", "Shaders/lamp.frag");
     Shader lightingShader("Shaders/lighting.vs", "Shaders/lighting.frag");
+    Shader Anim("Shaders/anim.vs", "Shaders/anim.frag");
 
 
     // Load models
     Model golem((char*)"Golem/Golem.obj");
     Model cuadro((char*)"Cuadro/cuadro.obj");
     Model librero((char*)"Librero/librero.obj");
-    Model cofre((char*)"Cofre/cofre.obj");
+    Model cofreArriba((char*)"Cofre/cofreArriba.obj");
+    Model cofreAbajo((char*)"Cofre/cofreAbajo.obj");
     Model mesaEnchArriba((char*)"MesaEncantamientos/mesaEncantamientosArriba.obj");
     Model mesaEnchAbajo((char*)"MesaEncantamientos/mesaEncantamientosAbajo.obj");
     Model mesaCrafteo((char*)"MesaCrafteo/mesaCrafteo.obj");
@@ -114,6 +123,8 @@ int main()
     Model escaleras((char*)"Casa/escaleras.obj");
     Model casaCristales((char*)"Casa/CasaCristales.obj");
     Model pasto((char*)"Pasto/pasto.obj");
+    Model velas((char*)"Velas/velas.obj");
+    Model fuego((char*)"Velas/fuego.obj");
 
 
     glm::mat4 projection = glm::perspective(camera.GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 100.0f);
@@ -189,20 +200,6 @@ int main()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST_MIPMAP_NEAREST);
 
-    image = stbi_load("images/goku.jpg", &textureWidth, &textureHeight, &nrChannels, 0);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textureWidth, textureHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-    glGenerateMipmap(GL_TEXTURE_2D);
-    if (image)
-    {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textureWidth, textureHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-        glGenerateMipmap(GL_TEXTURE_2D);
-    }
-    else
-    {
-        std::cout << "Failed to load texture" << std::endl;
-    }
-    stbi_image_free(image);
-
 
     // Game loop
     while (!glfwWindowShouldClose(window))
@@ -223,7 +220,7 @@ int main()
         lightingShader.Use();
         GLint lightPosLoc = glGetUniformLocation(lightingShader.Program, "light.position");
         GLint viewPosLoc = glGetUniformLocation(lightingShader.Program, "viewPos");
-        glUniform3f(lightPosLoc, lightPos.x + movelightPosx, lightPos.y + movelightPosy, lightPos.z + movelightPosz);
+        glUniform3f(lightPosLoc, lightPos.x, lightPos.y, lightPos.z);
         glUniform3f(viewPosLoc, camera.GetPosition().x, camera.GetPosition().y, camera.GetPosition().z);
 
 
@@ -248,11 +245,12 @@ int main()
         glm::mat4 model(1);
         glUniform1f(glGetUniformLocation(lightingShader.Program, "trans"), 1.0f);
 
-        model = glm::translate(model, glm::vec3(4.0f, -1.0f, -7.2f));
-        model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::translate(model, glm::vec3(4.5f, -1.2f, -7.2f)+glm::vec3(movx,0,movz));
+        model = glm::rotate(model, glm::radians(-90.0f+rot), glm::vec3(0.0f, 1.0f, 0.0f));
         model = glm::scale(model,glm::vec3(4.0f,4.0f,4.0f));
         glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         golem.Draw(lightingShader);
+        animacionGolem();
 
         model = glm::mat4(1);
         model = glm::translate(model, glm::vec3(-0.06f, 0.0f, 0.0f));
@@ -270,16 +268,72 @@ int main()
         librero.Draw(lightingShader);
 
         model = glm::mat4(1);
-        model = glm::translate(model, glm::vec3(-8.1f, 0.0f-0.02f, -7.2f+0.06f));
-        model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::translate(model, glm::vec3(-0.9f, -0.2f, -1.8f));
+        //model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::scale(model, glm::vec3(1.2, 1.2, 1.2));
         glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        cofre.Draw(lightingShader);
+        velas.Draw(lightingShader);
 
         model = glm::mat4(1);
-        model = glm::translate(model, glm::vec3(-6.3f, 0.0f, -7.2f));
-        model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        float time = glfwGetTime();
+        model = glm::translate(model, glm::vec3(-0.9f, 1.65f, -1.8f));
+        //model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::scale(model, glm::vec3(0.6*glm::abs(glm::sin(time))+0.6, 0.6 * glm::abs(glm::sin(time)) + 0.6, 0.6 * glm::abs(glm::sin(time)) + 0.6));
         glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        mesaEnchArriba.Draw(lightingShader);
+        fuego.Draw(lightingShader);
+
+        model = glm::mat4(1);
+        float time2 = glfwGetTime();
+        model = glm::translate(model, glm::vec3(-0.63f, 1.53f, -2.011f));
+        //model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::scale(model, glm::vec3(0.6 * glm::abs(glm::sin(time)) + 0.6, 0.6 * glm::abs(glm::sin(time)) + 0.6, 0.6 * glm::abs(glm::sin(time)) + 0.6));
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        fuego.Draw(lightingShader);
+
+        model = glm::mat4(1);
+        float time3 = glfwGetTime();
+        model = glm::translate(model, glm::vec3(-0.85f, 1.26f, -2.111f));
+        //model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::scale(model, glm::vec3(0.6 * glm::abs(glm::sin(time)) + 0.6, 0.6 * glm::abs(glm::sin(time)) + 0.6, 0.6 * glm::abs(glm::sin(time)) + 0.6));
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        fuego.Draw(lightingShader);
+
+
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-8.05f, 0.108f, -7.8f));
+        model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::rotate(model, glm::radians(90.0f)* (float)glm::abs(glm::sin(glfwGetTime()*0.5)), glm::vec3(0.0f, 0.0f, 1.0f));
+        model = glm::scale(model, glm::vec3(0.8, 0.8, 0.8));
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        cofreArriba.Draw(lightingShader);
+
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-8.05f, 0.108f, -7.8f));
+        model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::scale(model, glm::vec3(0.8, 0.8, 0.8));
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        cofreAbajo.Draw(lightingShader);
+
+        Anim.Use();
+        
+        GLint modelLoc = glGetUniformLocation(Anim.Program, "model");
+        GLint viewLoc = glGetUniformLocation(Anim.Program, "view");
+        GLint projLoc = glGetUniformLocation(Anim.Program, "projection");
+
+        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+        glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+
+
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-6.3f, 0.2f, -7.2f));
+        model = glm::rotate(model, glm::radians(-90.0f)+(float)glfwGetTime()*0.4f, glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(Anim.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        glUniform1f(glGetUniformLocation(Anim.Program, "time"), glfwGetTime());
+        mesaEnchArriba.Draw(Anim);
+
+        lightingShader.Use();
 
         model = glm::mat4(1);
         model = glm::translate(model, glm::vec3(-6.3f, 0.0f, -7.2f));
@@ -340,7 +394,7 @@ int main()
         glUniformMatrix4fv(glGetUniformLocation(lampshader.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
         glUniformMatrix4fv(glGetUniformLocation(lampshader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
         model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(lightPos.x + movelightPosx, lightPos.y + movelightPosy, lightPos.z + movelightPosz));
+        model = glm::translate(model, glm::vec3(lightPos.x, lightPos.y, lightPos.z));
         model = glm::scale(model, glm::vec3(0.02f));
         glUniformMatrix4fv(glGetUniformLocation(lampshader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         glBindVertexArray(VAO);
@@ -382,10 +436,72 @@ void DoMovement()
         camera.ProcessKeyboard(RIGHT, deltaTime);
     }
 
-    if (activanim)
-    {
-        if (rot > -90.0f)
-            rot -= 0.1f;
+}
+
+void animacionGolem(){
+    if (ruta1) {
+        rot = 0;
+        movx -= 0.02;
+        if (movx < -1.8f) {
+            ruta1 = false;
+            ruta2 = true;
+        }
+    }
+    if (ruta2) {
+        rot = 90.0f;
+        movz += 0.02;
+        if (movz > 1.8f) {
+            ruta2 = false;
+            ruta3 = true;
+        }
+    }
+    if (ruta3) {
+        rot = 180.0f;
+        movx += 0.02;
+        if (movx > 0.0f) {
+            ruta3 = false;
+            ruta4 = true;
+        }
+    }
+    if (ruta4) {
+        rot = 90.0f;
+        movz += 0.02;
+        if (movz > 3.6f) {
+            ruta4 = false;
+            ruta5 = true;
+        }
+    }
+    if (ruta5) {
+        rot = 0.0f;
+        movx -= 0.02;
+        if (movx < -1.8f) {
+            ruta5 = false;
+            ruta6 = true;
+        }
+    }
+    if (ruta6) {
+        rot = -90.0f;
+        movz -= 0.02;
+        if (movz < 1.8f) {
+            ruta6 = false;
+            ruta7 = true;
+        }
+    }
+    if (ruta7) {
+        rot = 180.0f;
+        movx += 0.02;
+        if (movx > 0.0f) {
+            ruta7 = false;
+            ruta8 = true;
+        }
+    }
+    if (ruta8) {
+        rot = -90.0f;
+        movz -= 0.02;
+        if (movz < 0.0f) {
+            ruta8 = false;
+            ruta1 = true;
+        }
     }
 
 }
@@ -408,40 +524,6 @@ void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode
         {
             keys[key] = false;
         }
-    }
-
-    if (keys[GLFW_KEY_U])
-    {
-        //activanim = true;
-        movelightPosz -= 0.1f;
-    }
-
-    if (keys[GLFW_KEY_J])
-    {
-        //activanim = true;
-        movelightPosz += 0.1f;
-    }
-
-    if (keys[GLFW_KEY_H])
-    {
-        //activanim = true;
-        movelightPosx -= 0.1f;
-    }
-
-    if (keys[GLFW_KEY_K])
-    {
-        //activanim = true;
-        movelightPosx += 0.1f;
-    }
-    if (keys[GLFW_KEY_M])
-    {
-        //activanim = true;
-        movelightPosy += 0.1f;
-    }
-    if (keys[GLFW_KEY_N])
-    {
-        //activanim = true;
-        movelightPosy -= 0.1f;
     }
 }
 
