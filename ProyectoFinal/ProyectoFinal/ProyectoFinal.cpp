@@ -33,7 +33,7 @@ void animacionGolem();
 
 
 // Camera
-Camera camera(glm::vec3(-4.5f, 2.0f, -1.8f));
+Camera camera(glm::vec3(-4.5f, 2.0f, -1.8f),glm::vec3(0.0f,1.0f,0.0f),-90.0);
 bool keys[1024];
 GLfloat lastX = 400, lastY = 300;
 bool firstMouse = true;
@@ -283,7 +283,6 @@ int main()
         fuego.Draw(lightingShader);
 
         model = glm::mat4(1);
-        float time2 = glfwGetTime();
         model = glm::translate(model, glm::vec3(-0.63f, 1.53f, -2.011f));
         //model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
         model = glm::scale(model, glm::vec3(0.6 * glm::abs(glm::sin(time)) + 0.6, 0.6 * glm::abs(glm::sin(time)) + 0.6, 0.6 * glm::abs(glm::sin(time)) + 0.6));
@@ -291,7 +290,6 @@ int main()
         fuego.Draw(lightingShader);
 
         model = glm::mat4(1);
-        float time3 = glfwGetTime();
         model = glm::translate(model, glm::vec3(-0.85f, 1.26f, -2.111f));
         //model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
         model = glm::scale(model, glm::vec3(0.6 * glm::abs(glm::sin(time)) + 0.6, 0.6 * glm::abs(glm::sin(time)) + 0.6, 0.6 * glm::abs(glm::sin(time)) + 0.6));
@@ -382,9 +380,6 @@ int main()
         casaCristales.Draw(lightingShader);
         glDisable(GL_BLEND);
         glUniform1f(glGetUniformLocation(lightingShader.Program, "trans"), 1.0f);
-
-        
-
         glBindVertexArray(0);
 
 

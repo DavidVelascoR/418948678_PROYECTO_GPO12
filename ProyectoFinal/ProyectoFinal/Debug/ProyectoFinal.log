@@ -1,25 +1,28 @@
 ﻿  ProyectoFinal.cpp
 D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(208,30): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
 D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(278,20): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(286,21): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(294,21): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(333,76): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(331,76): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
 D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(195,38): warning C4101: 'nrChannels': variable local sin referencia
 D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(195,9): warning C4101: 'textureWidth': variable local sin referencia
 D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(197,20): warning C4101: 'image': variable local sin referencia
 D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(195,23): warning C4101: 'textureHeight': variable local sin referencia
-D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(444,21): warning C4305: '-=': truncamiento de 'double' a 'float'
-D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(452,21): warning C4305: '+=': truncamiento de 'double' a 'float'
-D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(460,21): warning C4305: '+=': truncamiento de 'double' a 'float'
-D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(468,21): warning C4305: '+=': truncamiento de 'double' a 'float'
-D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(476,21): warning C4305: '-=': truncamiento de 'double' a 'float'
-D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(484,21): warning C4305: '-=': truncamiento de 'double' a 'float'
-D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(492,21): warning C4305: '+=': truncamiento de 'double' a 'float'
-D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(500,21): warning C4305: '-=': truncamiento de 'double' a 'float'
-D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(534,17): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(535,17): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(539,21): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(540,21): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(542,13): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(543,13): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(439,21): warning C4305: '-=': truncamiento de 'double' a 'float'
+D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(447,21): warning C4305: '+=': truncamiento de 'double' a 'float'
+D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(455,21): warning C4305: '+=': truncamiento de 'double' a 'float'
+D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(463,21): warning C4305: '+=': truncamiento de 'double' a 'float'
+D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(471,21): warning C4305: '-=': truncamiento de 'double' a 'float'
+D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(479,21): warning C4305: '-=': truncamiento de 'double' a 'float'
+D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(487,21): warning C4305: '+=': truncamiento de 'double' a 'float'
+D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(495,21): warning C4305: '-=': truncamiento de 'double' a 'float'
+D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(529,17): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(530,17): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(534,21): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(535,21): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(537,13): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(538,13): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+LINK : warning LNK4098: la biblioteca predeterminada'MSVCRT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
+soil2-debug.lib(etc1_utils.obj) : warning LNK4099: no se encontró PDB 'soil2-debug.pdb' con 'soil2-debug.lib(etc1_utils.obj)' o en 'D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\Debug\soil2-debug.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+soil2-debug.lib(image_DXT.obj) : warning LNK4099: no se encontró PDB 'soil2-debug.pdb' con 'soil2-debug.lib(image_DXT.obj)' o en 'D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\Debug\soil2-debug.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+soil2-debug.lib(image_helper.obj) : warning LNK4099: no se encontró PDB 'soil2-debug.pdb' con 'soil2-debug.lib(image_helper.obj)' o en 'D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\Debug\soil2-debug.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+soil2-debug.lib(SOIL2.obj) : warning LNK4099: no se encontró PDB 'soil2-debug.pdb' con 'soil2-debug.lib(SOIL2.obj)' o en 'D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\Debug\soil2-debug.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
   ProyectoFinal.vcxproj -> D:\Octavo Semestre\Pcs Graficas Lab\Repositorio\418948678_PROYECTO_GPO12\ProyectoFinal\Debug\ProyectoFinal.exe
